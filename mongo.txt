@@ -1,12 +1,12 @@
---Create a collection named orders.
+// Create a collection named orders.
 
 db.createCollection('orders')
 
 
---Insert at least 3 documents that represent an order. IMPORTANT: See section below for fields.
-    --orderDate -- see https://docs.mongodb.org/manual/reference/method/Date/
-    --orderTotal
-    --lineItems -- a sub-document that can accommodate many line items with fields: unitPrice, quantity, productName
+// Insert at least 3 documents that represent an order. IMPORTANT: See section below for fields.
+    // orderDate -- see https://docs.mongodb.org/manual/reference/method/Date/
+    // orderTotal
+    // lineItems -- a sub-document that can accommodate many line items with fields: unitPrice, quantity, productName
 var orders = db.orders;
 
 orders.insert({orderDate: new Date(), orderTotal: 11, lineItems:[{unitPrice: 1, quantity: 2, productName: 'Cool
@@ -20,21 +20,21 @@ orders.insert({orderDate: new Date(), orderTotal: 33, lineItems:[{unitPrice: 3, 
 productName: 'A-OkayProduct'}]})
 
 
---Find a single order document, any order document.
+// Find a single order document, any order document.
 orders.find({orderTotal: 33}).pretty()
 
 
---Find all orders and make them look pretty.
+// Find all orders and make them look pretty.
 orders.find().pretty()
 
 
---Find all orders with an orderDate that is prior to 1/1/2016.
+// Find all orders with an orderDate that is prior to 1/1/2016.
 orders.find({orderDate:{$lt:ISODate('2016-01-01')}}).pretty()
 
 
---Find all orders with an orderDate that is after 1/1/2016.
+// Find all orders with an orderDate that is after 1/1/2016.
 orders.find({orderDate:{$gt:ISODate('2016-01-01')}}).pretty()
 
 
---Find orders with lineItems that have a quantity that is less than 50, but greater than 5.
+// Find orders with lineItems that have a quantity that is less than 50, but greater than 5.
 orders.find({$and:[{'lineItems.quantity':{$gt:5}}, {'lineItems.quantity':{$lt:50}}]}).pretty()
